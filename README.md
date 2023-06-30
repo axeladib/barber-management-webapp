@@ -108,3 +108,13 @@ This is the **Table that represent the model of USER AND ROLE DB**
 ### Initialise Sequelize
 
 create at app/models/index.js
+
+**Purpose of initialise the Sequelize**
+- Association between the Users and Roles in **Many to many associations **
+> One USER can have several ROLES
+> one ROLE can be taken by several USERS
+
+_User.belongsToMany(Role)_ indicate that user model can belong to many Roles and vice versa
+
+**through, foreignKey, otherKey** is a new item created for the new table of _userroles_ as connection between _users_ and _roles_ table /
+via the primary key is _foreign keys_

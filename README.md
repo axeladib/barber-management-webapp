@@ -36,9 +36,9 @@ watch the results in the right.
 
 ## Tech
 
-Dillinger uses a number of open source projects to work properly:
+Queuely uses a number of open source projects to work properly:
 
-- [AngularJS] - HTML enhanced for web apps!
+- [React] - UI frontend !
 - [Ace Editor] - awesome web-based text editor
 - [markdown-it] - Markdown parser done right. Fast and easy to extend.
 - [Twitter Bootstrap] - great UI boilerplate for modern web apps
@@ -49,20 +49,23 @@ Dillinger uses a number of open source projects to work properly:
   to Markdown converter
 - [jQuery] - duh
 
-And of course Dillinger itself is open source with a [public repository][dill]
+And of course Queuely itself is open source with a [public repository][dill]
 on GitHub.
 
 ## Installation
 
-Dillinger requires [Node.js](https://nodejs.org/) v10+ to run.
+Queuely development requires [Node.js](https://nodejs.org/) v10+ to run.
 
 Install the dependencies and devDependencies and start the server.
 
 ```sh
-cd dillinger
-npm i
-node app
+npm install express sequelize pg pg-hstore body-parser cors jsonwebtoken bcryptjs --save
 ```
+- express : building RESFUL APIs
+- sequelize : building the model of database
+- cors : create the connection of URLs between the backend and frontend
+- body-parser : request the data from the server when the client side post the data to the server
+- jsonwebtoken - create the unique token or id that are personalise to one user only
 
 For production environments...
 
@@ -73,7 +76,7 @@ NODE_ENV=production node app
 
 ## Plugins
 
-Dillinger is currently extended with the following plugins.
+Queuely is currently extended with the following plugins.
 Instructions on how to use them in your own application are linked below.
 
 | Plugin           | README                                    |
@@ -87,7 +90,17 @@ Instructions on how to use them in your own application are linked below.
 
 ## Development
 
-Want to contribute? Great!
+### Define the Sequelize Model
 
-Dillinger uses Gulp + Webpack for fast developing.
-Make a change in your file and instantaneously see your updates!
+- user.model.js
+- role.model.js
+
+This is the **Table that represent the model of USER AND ROLE DB**
+> #### After initializing Sequelize, we don’t need to write CRUD functions, Sequelize supports all of them
+>
+> -  create a new User: create(object)
+> - find a User by id: findByPk(id)
+> - find a User by email: findOne({ where: { email: ... } })
+> - get all Users: findAll()
+> - find all Users by username: findAll({ where: { username: ... } })
+> These functions will be sued in our **Controllers and Middlewares**

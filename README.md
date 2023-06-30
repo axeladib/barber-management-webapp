@@ -104,3 +104,7 @@ This is the **Table that represent the model of USER AND ROLE DB**
 > - get all Users: findAll()
 > - find all Users by username: findAll({ where: { username: ... } })
 > These functions will be sued in our **Controllers and Middlewares**
+
+### Initialise Sequelize
+
+create at app/models/index.js

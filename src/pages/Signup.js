@@ -10,7 +10,7 @@ const Signup = () => {
   const handleSingup = async () => {
     //TODO: Send signup data to the backend
     try {
-      const response = await axios.post("/api/signup", {
+      const response = await axios.post("/signup", {
         username,
         email,
         phone,

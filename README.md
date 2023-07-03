@@ -91,3 +91,11 @@ _middleware/verifySignUp.js_
 - check if username or email duplicate or not
 - check if the roles in the request is existed or not
 
+**To process Authentication and Authorization:**
+- check if _token_ is provided legal or not.
+- we get the _token_ from **x-access-token** of HTTP headers then use **jsonwebtoken** _verify_ function
+- check if the _roles_ of the user contain role or not
+
+File : 
+_middleware/authJwt.js_
+

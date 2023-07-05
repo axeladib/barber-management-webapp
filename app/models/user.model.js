@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     password: { type: Sequelize.STRING },
   });
-  return User
+  return User;
 };
 
 // This Sequelize Models represent the users table in PostgreSQL

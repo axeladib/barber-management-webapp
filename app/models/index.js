@@ -3,10 +3,6 @@
 const config = require("../config/db.config");
 
 //TEST THE DATA THROW TO THE INITIALISATION
-console.log(config.DB);
-console.log(config.USER);
-console.log(config.PASSWORD);
-console.log(config.pool.max);
 
 const Sequelize = require("sequelize");
 
@@ -27,8 +23,8 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.user = require("../models/user.model.js")(Sequelize, sequelize);
-db.role = require("../models/role/model.js")(Sequelize, sequelize);
+db.user = require("../models/user.model.js")(sequelize, Sequelize);
+db.role = require("../models/role.model.js")(sequelize, Sequelize);
 
 db.role.belongsToMany(db.user, {
   through: "user_roles",

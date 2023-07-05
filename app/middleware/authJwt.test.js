@@ -1,7 +1,3 @@
-const jwt = require("jsonwebtoken");
-const config = require("../config/auth.config");
-const db = require("../models");
-const User = db.user;
 const authJwt = require("./authJwt");
 const verifyToken = authJwt.verifyToken;
 
@@ -14,7 +10,7 @@ describe("verifyToken", () => {
       status: jest.fn().mockReturnThis(),
       send: jest.fn(),
     };
-    
+
     //Test the output
     // console.log(res.status);
     // console.log(res.send)

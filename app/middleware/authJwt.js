@@ -23,6 +23,15 @@ const verifyToken = (req, res, next) => {
   });
 };
 
+const isAdmin = (req, res, next) => {
+  // prototype.findByPk is the method to retieve user data by the primary key  
+  User.findByPk(req.userId).then((user) => {
+     user.getRoles().then(roles =>{
+      
+     })
+  });
+};
+
 const authJwt = {
   verifyToken: verifyToken,
 };

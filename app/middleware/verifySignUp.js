@@ -2,7 +2,7 @@ const db = require("../models");
 const ROLES = db.ROLES;
 const User = db.user;
 
- const checkDuplicateUsernameOrEmail = (req, res, next) => {
+const checkDuplicateUsernameOrEmail = (req, res, next) => {
   //TODO: Perform the query to Find mathcing username
   // Return  a Promise that rsolve of fpund user object or "null if no matching user is found"
 
@@ -49,6 +49,6 @@ const checkRolesExisted = (req, res, next) => {
 
 const verifySignUp = {
   checkDuplicateUsernameOrEmail: checkDuplicateUsernameOrEmail,
-  checkRolesExisted: checkRolesExisted
+  checkRolesExisted: checkRolesExisted,
 };
 module.exports = verifySignUp;

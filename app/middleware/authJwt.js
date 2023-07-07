@@ -24,16 +24,60 @@ const verifyToken = (req, res, next) => {
 };
 
 const isAdmin = (req, res, next) => {
-  // prototype.findByPk is the method to retieve user data by the primary key  
+  // prototype.findByPk is the method to retieve user data by the primary key
   User.findByPk(req.userId).then((user) => {
-     user.getRoles().then(roles =>{
-      
-     })
+    user.getRoles().then((roles) => {
+      //roles is array data structure
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i].name === "admin") {
+          next();
+          return;
+        }
+      }
+
+      res.status(403).send({ message: "Require Admin Role!" });
+      return;
+    });
+  });
+};
+
+const isModerator = (req, res, next) => {
+  User.findByPk(req.userId).then((user) => {
+    user.getRoles().then((roles) => {
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i].name === "moderator") {
+          next();
+          return;
+        }
+      }
+      res.status(403).send({ message: "Require Moderator Role!" });
+    });
+  });
+};
+
+const isModeratorOrAdmin = (req, res, next) => {
+  User.findByPk(req.userId).then((user) => {
+    user.getRoles().then((roles) => {
+      for (let i = 0; i < roles.length; i++) {
+        if (roles[i].name === "moderator") {
+          next();
+          return;
+        }
+        if (roles[i].name === "admin") {
+          next();
+          return;
+        }
+      }
+      res.status(403).send({ message: "Require MOderator or Admin Role!" });
+    });
   });
 };
 
 const authJwt = {
   verifyToken: verifyToken,
+  isAdmin: isAdmin,
+  isModerator: isModerator,
+  isModeratororAdmin: isModeratorOrAdmin,
 };
 
 module.exports = authJwt;

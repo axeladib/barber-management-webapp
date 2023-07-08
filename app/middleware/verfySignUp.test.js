@@ -55,20 +55,56 @@ describe("verifySignUp", () => {
         status: jest.fn().mockReturnThis(),
         send: jest.fn(),
       };
-      const next = jest.fn()
+      const next = jest.fn();
 
       verifySignUp.checkDuplicateUsernameOrEmail(req, res, next);
-      //Return the falsy statement of req and res to compensate the username and email is not in use 
+      //Return the falsy statement of req and res to compensate the username and email is not in use
       expect(res.status).not.toHaveBeenCalled();
       expect(res.send).not.toHaveBeenCalled();
       //Invoke the next function to called if the uername an demail are not in use
       expect(next).toHaveBeenCalled();
     });
   });
+
+  //TODO: Tested the checkRolesExisted
+
+  //FIXME: First : Return error if the role is not exist
+  //FIXME: Second : Called next if the role is exist
+
+  describe("checkRolesExisted", () => {
+    //FIXME: Check if there is
+    it("should return an error if role is a roles is not exist", () => {
+      const req = {
+        body: {
+          roles: ["admin", "moderator", "invalidRole"],
+        },
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        send: jest.fn(),
+      };
+
+      verifySignUp.checkRolesExisted(req, res, ()=>{});
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.send).totoHaveBeenCalledWith({
+        message: "Failed! Role is not existed = invalidRole",
+      });
+    });
+
+    it("should go to next if all role existed", () => {
+      const req = {
+        body: ["admin", "moderator"],
+      };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        send: jest.fn(),
+      };
+      const next = jest.fn();
+
+      verifySignUp.checkRolesExisted(req, res, next);
+      expect(res.status).not.toHaveBeenCalled();
+      expect(res.send).not.toHaveBeenCalled();
+      expect(next).toHaveBeenCalled();
+    });
+  });
 });
-
-//TODO: Tested the checkRolesExisted
-
-
-//FIXME: First : Return error if the role is not exist
-//FIXME: Second : Called next if the role is exist

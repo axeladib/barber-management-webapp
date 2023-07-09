@@ -30,6 +30,7 @@ Install the dependencies and devDependencies and start the server.
 ```sh
 npm install express sequelize pg pg-hstore body-parser cors jsonwebtoken bcryptjs --save
 ```
+
 - express : building RESFUL APIs
 - sequelize : building the model of database
 - cors : create the connection of URLs between the backend and frontend
@@ -51,23 +52,25 @@ NODE_ENV=production node app
 - role.model.js
 
 This is the **Table that represent the model of USER AND ROLE DB**
+
 > #### After initializing Sequelize, we don’t need to write CRUD functions, Sequelize supports all of them
 >
-> -  create a new User: create(object)
+> - create a new User: create(object)
 > - find a User by id: findByPk(id)
 > - find a User by email: findOne({ where: { email: ... } })
 > - get all Users: findAll()
 > - find all Users by username: findAll({ where: { username: ... } })
-> These functions will be sued in our **Controllers and Middlewares**
+>   These functions will be sued in our **Controllers and Middlewares**
 
 ### Initialise Sequelize
 
 create at app/models/index.js
 
 **Purpose of initialise the Sequelize**
+
 - Association between the Users and Roles in **Many to many associations **
-> One USER can have several ROLES
-> one ROLE can be taken by several USERS
+  > One USER can have several ROLES
+  > one ROLE can be taken by several USERS
 
 _User.belongsToMany(Role)_ indicate that user model can belong to many Roles and vice versa
 
@@ -79,8 +82,7 @@ via the primary key is _foreign keys_
 File :
 _app/config/auth.config.js_
 
-- use the JWT function such as **verify()** and **sign()** that needs the secret key to encode and decode token. 
-
+- use the JWT function such as **verify()** and **sign()** that needs the secret key to encode and decode token.
 
 ### Middleware
 
@@ -88,17 +90,29 @@ File :
 _middleware/verifySignUp.js_
 
 **To verify a Signup Action**
+
 - check if username or email duplicate or not
 - check if the roles in the request is existed or not
 
-
-File : 
+File :
 _middleware/authJwt.js_
 
 **To process Authentication and Authorization:**
+
 - check if _token_ is provided legal or not.
 - we get the _token_ from **x-access-token** of HTTP headers then use **jsonwebtoken** _verify_ function
 - check if the _roles_ of the user contain role or not
 
+### Middleware Testing
 
+File :
+_middleware/authJwt.test.js_
 
+- testing when the **verifyToken** function need to verify the token request from the header
+- in return if the header is not provided the test is return message and status code of 403
+
+File :
+_middleware/verifySignUp_
+
+- checking functionality of the checkDuplicateEmailOrUsername function
+- checking functionality of the checkRolesExisted

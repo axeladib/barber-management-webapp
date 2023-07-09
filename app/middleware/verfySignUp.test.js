@@ -38,7 +38,7 @@ describe("verifySignUp", () => {
       verify.checkDuplicateUsernameOrEmail(req, res, () => {});
 
       expect(res.status).toHaveBeenCalledWith(400);
-      expect(res.send).toHveBeenCalledWith({
+      expect(res.send).toHaveBeenCalledWith({
         message: "Failed!!! Email is already been used",
       });
     });
@@ -84,9 +84,9 @@ describe("verifySignUp", () => {
         send: jest.fn(),
       };
 
-      verifySignUp.checkRolesExisted(req, res, ()=>{});
+      verifySignUp.checkRolesExisted(req, res, () => {});
       expect(res.status).toHaveBeenCalledWith(400);
-      expect(res.send).totoHaveBeenCalledWith({
+      expect(res.send).toHaveBeenCalledWith({
         message: "Failed! Role is not existed = invalidRole",
       });
     });
